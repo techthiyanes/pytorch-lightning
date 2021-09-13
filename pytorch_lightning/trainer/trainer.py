@@ -989,6 +989,9 @@ class Trainer(
         # ----------------------------
         # TRAIN
         # ----------------------------
+        # reset logger connector
+        self.logger_connector.reset(trainer_metrics=True)
+
         # hook
         if self.state.fn == TrainerFn.FITTING:
             self.call_hook("on_fit_start")
@@ -1166,7 +1169,7 @@ class Trainer(
             self.sanity_checking = True
 
             # reset validation metrics
-            self.logger_connector.reset()
+            self.logger_connector.reset(trainer_metrics=True)
 
             self.call_hook("on_sanity_check_start")
 
@@ -1180,7 +1183,7 @@ class Trainer(
             self.call_hook("on_sanity_check_end")
 
             # reset validation metrics
-            self.logger_connector.reset()
+            self.logger_connector.reset(trainer_metrics=True)
 
             # reset the seed to what it was before sanity check
             # prevents sanity check to affect random sampling in training

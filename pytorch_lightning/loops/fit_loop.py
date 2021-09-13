@@ -189,8 +189,7 @@ class FitLoop(Loop):
         """Resets the internal state of this loop."""
 
     def on_run_start(self) -> None:
-        """Reset the metrics and calls the ``on_train_start`` hook."""
-        self.trainer.logger_connector.reset_metrics()
+        """Calls the ``on_train_start`` hook."""
         self._results.to(device=self.trainer.lightning_module.device)
         self.trainer.call_hook("on_train_start")
 
